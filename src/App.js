@@ -1,18 +1,29 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component, PropTypes } from 'react';
+import { Router } from 'react-router';
 import './App.css';
 
 class App extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+    routes: PropTypes.element.isRequired
+  };
+
+  get content() {
+    return (
+      <Router
+        routes={this.props.routes}
+        history={this.props.history} />
+    )
+  }
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        {this.content}
       </div>
     );
   }
