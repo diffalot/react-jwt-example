@@ -15,3 +15,6 @@ export const API_REQUEST = 'API_REQUEST'
 export const CALLING_API = 'CALL_API'
 export const RECEIVE_API = 'RECEIVE_API'
 export const API_ERROR = 'API_ERROR'
+
+export const GET_PROFILE = 'GET_PROFILE'
+export const PROFILE_RETREIVED = 'PROFILE_RETREIVED'

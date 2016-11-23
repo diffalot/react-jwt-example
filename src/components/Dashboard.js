@@ -1,16 +1,32 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
+import {connect} from 'react-redux'
 
-function Dashboard () {
-  return (
-    <article>
-      <section className='text-section'>
-        <h1>Dashboard</h1>
-        <p>
-          Welcome, you are logged in! To have a look at the code behind this application, go to <a href='https://github.com/sotojuan/saga-login-flow'>Github</a>.
-        </p>
-      </section>
-    </article>
-  )
+import { getProfile } from '../actions/api'
+
+class Dashboard extends Component {
+  componentDidMount () {
+    this.props.dispatch(getProfile())
+  }
+  render () {
+    return (
+      <article>
+        <section className='text-section'>
+          <h1>Dashboard</h1>
+          <pre>{JSON.stringify(this.props.profile, null, 4)}</pre>
+        </section>
+      </article>
+    )
+  }
 }
 
-export default Dashboard
+Dashboard.propTypes = {
+  profile: PropTypes.object
+}
+
+function select (state) {
+  return {
+    profile: state.profile.profile
+  }
+}
+
+export default connect(select)(Dashboard)

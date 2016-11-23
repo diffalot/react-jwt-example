@@ -14,3 +14,11 @@ export function post (endpoint, data) {
 export function get (endpoint, data) {
   return {type: API_REQUEST, endpoint, data, method: 'GET'}
 }
+
+export function getProfile () {
+  return {
+    type: API_REQUEST,
+    endpoint: '/api/me',
+    method: 'GET'
+  }
+}
