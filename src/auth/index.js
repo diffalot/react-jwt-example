@@ -31,7 +31,11 @@ let auth = {
   * Logs the current user out
   */
   logout () {
-    return api.post('/logout')
+    // return api.post('/logout')
+    return new Promise(resolve => {
+      localStorage.removeItem('token')
+      resolve(true)
+    })
   },
   /**
   * Checks if a user is logged in
