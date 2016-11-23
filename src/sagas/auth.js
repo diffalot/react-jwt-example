@@ -17,12 +17,13 @@ import {
   SET_AUTH,
   LOGOUT,
   CHANGE_FORM,
-  REQUEST_ERROR
+  REQUEST_ERROR,
+  API_REQUEST
 } from '../constants'
 
 /**
  * Effect to handle authorization
- * @param  {string} username               The username of the user
+ * @param  {string} email                  The email of the user
  * @param  {string} password               The password of the user
  * @param  {object} options                Options
  * @param  {boolean} options.isRegistering Is this a register request?
@@ -104,6 +105,7 @@ export function * loginFlow () {
       // ...we send Redux appropiate actions
       yield put({type: SET_AUTH, newAuthState: true}) // User is logged in (authorized)
       yield put({type: CHANGE_FORM, newFormState: {email: '', password: ''}}) // Clear form
+      yield put({type: API_REQUEST, endpoint: '/api/me', method: 'GET'})
       forwardTo('/dashboard') // Go to dashboard page
       // If `logout` won...
     } else if (winner.logout) {

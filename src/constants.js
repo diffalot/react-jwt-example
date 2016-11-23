@@ -10,3 +10,8 @@ export const CHANGE_FORM = 'CHANGE_FORM'
 export const REQUEST_ERROR = 'REQUEST_ERROR'
 
 export const CLEAR_ERROR = 'CLEAR_ERROR'
+
+export const API_REQUEST = 'API_REQUEST'
+export const CALLING_API = 'CALL_API'
+export const RECEIVE_API = 'RECEIVE_API'
+export const API_ERROR = 'API_ERROR'

@@ -13,7 +13,8 @@ import * as reducers from './reducers'
 
 import { clearError } from './actions/auth'
 
-import rootSaga from './sagas'
+import authSaga from './sagas/auth'
+import apiSaga  from './sagas/api'
 
 let logger = createLogger({
   // Ignore `CHANGE_FORM` actions in the logger, since they fire after every keystroke
@@ -36,7 +37,8 @@ const store = createStore(reducer,
   )
 )
 
-sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(authSaga)
+sagaMiddleware.run(apiSaga)
 
 const history = syncHistoryWithStore(baseHistory, store)
 
