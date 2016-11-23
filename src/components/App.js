@@ -1,25 +1,34 @@
-import React from 'react'
-import { Link } from 'react-router'
-import { connect } from 'react-redux'
-import { logout } from '../actions/user'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import Nav from './common/Nav'
 
-function App({ children, logout }) {
-  return (
-    <div>
-      <header>
-        Links:
-        {' '}
-        <Link to="/">Home</Link>
-        {' '}
-        <Link to="/foo">{'Foo (Login Required)'}</Link>
-        {' '}
-        <Link to="/login">Login</Link>
-        {' '}
-        <button onClick={() => logout()}>Logout</button>
-      </header>
-      <div style={{ marginTop: '1.5em' }}>{children}</div>
-    </div>
-  )
+class App extends Component {
+  render () {
+    return (
+      <div className='wrapper'>
+        <Nav loggedIn={this.props.data.loggedIn}
+          currentlySending={this.props.data.currentlySending}
+          history={this.props.history}
+          dispatch={this.props.dispatch}
+          location={this.props.location} />
+        {this.props.children}
+      </div>
+    )
+  }
 }
 
-export default connect(false, { logout })(App)
+App.propTypes = {
+  data: React.PropTypes.object,
+  history: React.PropTypes.object,
+  location: React.PropTypes.object,
+  children: React.PropTypes.object,
+  dispatch: React.PropTypes.func
+}
+
+function select (state) {
+  return {
+    data: state
+  }
+}
+
+export default connect(select)(App)
