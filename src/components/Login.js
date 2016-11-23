@@ -1,59 +1,49 @@
-import React, { Component, PropTypes } from 'react'
-import { routerActions } from 'react-router-redux'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import Form from './common/Form'
 
-import { login } from '../actions/user'
+import {loginRequest} from '../actions/auth'
 
-function select(state, ownProps) {
-  const isAuthenticated = state.user.name || false
-  const redirect = ownProps.location.query.redirect || '/'
-  return {
-    isAuthenticated,
-    redirect
+class Login extends Component {
+  constructor (props) {
+    super(props)
+
+    this._login = this._login.bind(this)
+  }
+
+  render () {
+    let {dispatch} = this.props
+    let {formState, currentlySending, error} = this.props.data
+
+    return (
+      <div className='form-page__wrapper'>
+        <div className='form-page__form-wrapper'>
+          <div className='form-page__form-header'>
+            <h2 className='form-page__form-heading'>Login</h2>
+          </div>
+          <Form data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._login} btnText={'Login'} error={error} currentlySending={currentlySending} />
+        </div>
+      </div>
+    )
+  }
+
+  _login (email, password) {
+    this.props.dispatch(loginRequest({email, password}))
   }
 }
 
-class LoginContainer extends Component {
-
-    static propTypes = {
-      login: PropTypes.func.isRequired,
-      replace: PropTypes.func.isRequired
-    };
-
-    componentWillMount() {
-      const { isAuthenticated, replace, redirect } = this.props
-      if (isAuthenticated) {
-        replace(redirect)
-      }
-    }
-
-    componentWillReceiveProps(nextProps) {
-      const { isAuthenticated, replace, redirect } = nextProps
-      const { isAuthenticated: wasAuthenticated } = this.props
-
-      if (!wasAuthenticated && isAuthenticated) {
-        replace(redirect)
-      }
-    }
-
-    onClick = (e) => {
-      e.preventDefault()
-      this.props.login({
-        name: this.refs.name.value
-      })
-    };
-
-    render() {
-      return (
-        <div>
-          <h2>Enter your name</h2>
-          <input type="text" ref="name" />
-          <br/>
-          <button onClick={this.onClick}>Login</button>
-        </div>
-      )
-    }
-
+Login.propTypes = {
+  data: React.PropTypes.object,
+  history: React.PropTypes.object,
+  dispatch: React.PropTypes.func
 }
 
-export default connect(select, { login, replace: routerActions.replace })(LoginContainer)
+// Which props do we want to inject, given the global state?
+function select (state) {
+  return {
+    data: state.auth
+  }
+}
+
+// Wrap the component to inject dispatch and state into it
+export default connect(select)(Login)

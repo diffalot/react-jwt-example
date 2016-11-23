@@ -1,3 +1,5 @@
-import user from './user'
+import auth from './auth'
 
-module.exports = { user }
+module.exports = {
+  auth
+}

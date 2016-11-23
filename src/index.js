@@ -41,7 +41,7 @@ sagaMiddleware.run(rootSaga)
 const history = syncHistoryWithStore(baseHistory, store)
 
 const UserIsAuthenticated = UserAuthWrapper({
-  authSelector: state => state.user,
+  authSelector: state => state.auth,
   redirectAction: routerActions.replace,
   wrapperDisplayName: 'UserIsAuthenticated'
 })
