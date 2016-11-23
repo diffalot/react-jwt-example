@@ -6,8 +6,8 @@ class App extends Component {
   render () {
     return (
       <div className='wrapper'>
-        <Nav loggedIn={this.props.data.loggedIn}
-          currentlySending={this.props.data.currentlySending}
+        <Nav loggedIn={this.props.data.auth.loggedIn}
+          currentlySending={this.props.data.auth.currentlySending}
           history={this.props.history}
           dispatch={this.props.dispatch}
           location={this.props.location} />

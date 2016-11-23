@@ -11,7 +11,7 @@ import './index.css';
 
 import * as reducers from './reducers'
 
-import clearError from './actions/clear-error'
+import { clearError } from './actions/auth'
 
 import rootSaga from './sagas'
 
@@ -51,7 +51,6 @@ function checkAuth (nextState, replace) {
 
   let {loggedIn} = store.getState().auth
 
-  console.log('checking auth')
   store.dispatch(clearError())
 
   // Check if the path isn't dashboard. That way we can apply specific logic to
@@ -61,7 +60,7 @@ function checkAuth (nextState, replace) {
       if (nextState.location.state && nextState.location.pathname) {
         replace(nextState.location.pathname)
       } else {
-        replace('/')
+        replace('/dashboard')
       }
     }
   } else {
@@ -70,7 +69,7 @@ function checkAuth (nextState, replace) {
       if (nextState.location.state && nextState.location.pathname) {
         replace(nextState.location.pathname)
       } else {
-        replace('/')
+        replace('/dashboard')
       }
     }
   }

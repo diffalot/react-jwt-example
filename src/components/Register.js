@@ -27,8 +27,8 @@ class Register extends Component {
     )
   }
 
-  _register (username, password) {
-    this.props.dispatch(registerRequest({username, password}))
+  _register (email, password) {
+    this.props.dispatch(registerRequest({email, password}))
   }
 }
 
@@ -40,7 +40,7 @@ Register.propTypes = {
 
 function select (state) {
   return {
-    data: state
+    data: state.auth
   }
 }
 
