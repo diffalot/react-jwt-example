@@ -62,7 +62,7 @@ import {
   CALLING_API,
   RECEIVE_API,
   API_ERROR
-} from '../constants'
+} from './constants'
 
 export function * callApi ({endpoint, data, method}) {
   yield put({type: CALLING_API, sending: true})

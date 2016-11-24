@@ -8,7 +8,7 @@
 // import genSalt from '../auth/salt'
 import {browserHistory} from 'react-router'
 import {take, call, put, fork, race} from 'redux-saga/effects'
-import auth from '../auth'
+import auth from './index.js'
 
 import {
   SENDING_REQUEST,
@@ -19,7 +19,7 @@ import {
   CHANGE_FORM,
   REQUEST_ERROR,
   API_REQUEST
-} from '../constants'
+} from './constants'
 
 /**
  * Effect to handle authorization

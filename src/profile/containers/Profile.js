@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import {connect} from 'react-redux'
 
-import { getProfile } from '../actions/api'
+import { getProfile } from '../actions'
 
 class Dashboard extends Component {
   componentDidMount () {

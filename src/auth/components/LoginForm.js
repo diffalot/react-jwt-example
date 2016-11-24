@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import ErrorMessage from './ErrorMessage'
 import LoadingButton from './LoadingButton'
 
-import {changeForm} from '../../actions/auth'
+import {changeForm} from '../actions'
 
 class Form extends Component {
   constructor (props) {

@@ -11,10 +11,7 @@ import './index.css';
 
 import * as reducers from './reducers'
 
-import { clearError } from './actions/auth'
-
-import authSaga from './sagas/auth'
-import apiSaga  from './sagas/api'
+import { clearError } from './auth/actions.js'
 
 let logger = createLogger({
   // Ignore `CHANGE_FORM` actions in the logger, since they fire after every keystroke
@@ -37,16 +34,17 @@ const store = createStore(reducer,
   )
 )
 
-sagaMiddleware.run(authSaga)
-sagaMiddleware.run(apiSaga)
+import runSagas from './sagas'
+
+runSagas(sagaMiddleware)
 
 const history = syncHistoryWithStore(baseHistory, store)
 
-import App from './components/App'
+import App from './containers/App'
 import Home from './components/Home'
-import Login from './components/Login'
-import Register from './components/Register'
-import Dashboard from './components/Dashboard'
+import Login from './auth/containers/Login'
+import Register from './auth/containers/Register'
+import Dashboard from './profile/containers/Profile'
 import NotFound from './components/NotFound'
 
 function checkAuth (nextState, replace) {

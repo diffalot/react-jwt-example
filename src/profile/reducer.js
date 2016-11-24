@@ -6,7 +6,7 @@ import {
   GET_PROFILE,
   PROFILE_RETREIVED,
   RECEIVE_API
-} from '../constants'
+} from './constants'
 
 // The initial application state
 let initialState = {

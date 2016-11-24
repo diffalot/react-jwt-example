@@ -12,7 +12,7 @@ import {
   LOGOUT,
   REQUEST_ERROR,
   CLEAR_ERROR
-} from '../constants'
+} from './constants'
 
 /**
  * Sets the form state

@@ -8,7 +8,7 @@ import {
   SENDING_REQUEST,
   REQUEST_ERROR,
   CLEAR_ERROR
-} from '../constants'
+} from './constants'
 import auth from '../auth'
 
 // The initial application state
