@@ -1,3 +1,9 @@
+# Setup
+
+1. copy .env.example to .env and edit as needed
+
+# Create React App README
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
