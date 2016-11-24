@@ -1,2 +1,7 @@
-export { auth } from './auth/reducer.js'
-export { profile } from './profile/reducer.js'
+import auth from './auth/reducer.js'
+import profile from './profile/reducer.js'
+
+export default {
+  auth,
+  profile
+}

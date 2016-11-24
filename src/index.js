@@ -9,7 +9,7 @@ import createLogger from 'redux-logger'
 
 import './index.css';
 
-import * as reducers from './reducers'
+import reducers from './reducers'
 
 import { clearError } from './auth/actions.js'
 
