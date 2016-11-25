@@ -5,6 +5,11 @@
   "proxy": "http://localhost:4000",
   "devDependencies": {
     "enzyme": "^2.6.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-config-standard-react": "^4.2.0",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-react": "^6.7.1",
+    "eslint-plugin-standard": "^2.0.1",
     "localStorage": "^1.0.3",
     "react-addons-test-utils": "^15.4.1",
     "react-scripts": "0.7.0"
@@ -27,6 +32,14 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "standard",
+      "standard-react"
+    ],
+    "globals": {
+      "describe": false,
+      "it": false,
+      "expect": false
+    }
   }
 }
