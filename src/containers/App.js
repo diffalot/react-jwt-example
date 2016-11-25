@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Nav from '../components/Nav'
 
-class App extends Component {
+export class App extends Component {
   render () {
     return (
       <div>
