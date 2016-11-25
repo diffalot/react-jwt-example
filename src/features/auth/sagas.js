@@ -34,8 +34,8 @@ export function * authorize ({email, password, isRegistering}) {
 
   // We then try to register or log in the user, depending on the request
   try {
-    //let salt = genSalt(username)
-    //let hash = hashSync(password, salt)
+    // let salt = genSalt(username)
+    // let hash = hashSync(password, salt)
     let response
 
     // For either log in or registering, we call the proper function in the `auth`

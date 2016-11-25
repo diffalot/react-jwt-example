@@ -16,7 +16,7 @@ class Login extends Component {
     let {formState, currentlySending, error} = this.props.data
 
     return (
-        <LoginForm data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._login} btnText={'Login'} error={error} currentlySending={currentlySending} />
+      <LoginForm data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._login} btnText={'Login'} error={error} currentlySending={currentlySending} />
     )
   }
 

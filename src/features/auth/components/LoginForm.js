@@ -33,7 +33,7 @@ class Form extends Component {
             Email
           </label>
         </div>
-        <div className='form__field-wrapper'>
+        <div>
           <input
             className='form__field-input'
             id='password'
@@ -41,18 +41,18 @@ class Form extends Component {
             value={this.props.data.password}
             placeholder='••••••••••'
             onChange={this._changePassword} />
-          <label className='form__field-label' htmlFor='password'>
+          <label htmlFor='password'>
             Password
           </label>
         </div>
-        <div className='form__submit-btn-wrapper'>
+        <div>
           {this.props.currentlySending ? (
             <LoadingButton />
           ) : (
             <button className='form__submit-btn' type='submit'>
               {this.props.btnText}
             </button>
-             )}
+          )}
         </div>
       </form>
     )

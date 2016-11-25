@@ -16,7 +16,7 @@ class Register extends Component {
     let {formState, currentlySending, error} = this.props.data
 
     return (
-        <LoginForm data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._register} btnText={'Register'} error={error} currentlySending={currentlySending} />
+      <LoginForm data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._register} btnText={'Register'} error={error} currentlySending={currentlySending} />
     )
   }
 
