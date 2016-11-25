@@ -1,5 +1,6 @@
+import { takeLatest } from 'redux-saga'
+import { put } from 'redux-saga/effects'
 import fetch from 'isomorphic-fetch'
-import {take, call, put, fork} from 'redux-saga/effects'
 
 import {
   FETCH_PROFILE,
@@ -23,41 +24,29 @@ if (process.env.NODE_ENV === 'test') {
 
 // Worker Sagas
 
-export function * fetchProfile () {
-  yield put({type: FETCH_PROFILE_BEGIN, sending: true})
-  let payload = yield fetch(`${API_URL}/me`, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.token}`
-    },
-    method: 'GET'
-  })
-    .then(function (response) {
-      return response.json()
+function * fetchProfile () {
+  yield put({type: FETCH_PROFILE_BEGIN})
+  try {
+    const profile = yield fetch(`${API_URL}/me`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.token}`
+      }
     })
-    .catch(function (error) {
-      // if this is a jwt token error, we should request one
-      put({type: FETCH_PROFILE_ERROR, payload: error})
-    })
-  yield put({type: FETCH_PROFILE_END, payload: payload})
+      .then(function (response) {
+        return response.json()
+      })
+    yield put({type: FETCH_PROFILE_END, payload: profile})
+  } catch (error) {
+    put({type: FETCH_PROFILE_ERROR, payload: error})
+  }
 }
 
 // Watcher Sagas
 
-export function * fetchProfileWatcher () {
-  // Because sagas are generators, doing `while (true)` doesn't block our program
-  // Basically here we say "this saga is always listening for actions"
-  while (true) {
-    // And we're listening for `LOGIN_REQUEST` actions and destructuring its payload
-    yield take(FETCH_PROFILE)
-    yield call(fetchProfile)
-  }
+function * fetchProfileWatcher () {
+  yield * takeLatest(FETCH_PROFILE, fetchProfile)
 }
 
-// The root saga is what we actually send to Redux's middleware. In here we fork
-// each saga so that they are all "active" and listening.
-// Sagas are fired once at the start of an app and can be thought of as processes running
-// in the background, watching actions dispatched to the store.
-export default function * root () {
-  yield fork(fetchProfileWatcher)
-}
+export default fetchProfileWatcher
