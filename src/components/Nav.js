@@ -15,22 +15,22 @@ class Nav extends Component {
 
   render () {
     let navButtons = this.props.loggedIn ? (
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to='/dashboard'>Dashboard</Link>
-              </li>
-              <li>
-                {this.props.currentlySending ? (
-                    <LoadingButton />
-                ) : (
-                    <a href='#' onClick={this._logout}>Logout</a>
-                )}
-              </li>
-            </ul>
-          </nav>
-        </div>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to='/dashboard'>Dashboard</Link>
+            </li>
+            <li>
+              {this.props.currentlySending ? (
+                <LoadingButton />
+              ) : (
+                <a href='#' onClick={this._logout}>Logout</a>
+              )}
+            </li>
+          </ul>
+        </nav>
+      </div>
     ) : (
       <div>
         <nav>

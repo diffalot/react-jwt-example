@@ -36,7 +36,8 @@
       "standard",
       "standard-react"
     ],
-    "globals": {
+  "globals": {
+      "jest": false,
       "describe": false,
       "it": false,
       "expect": false

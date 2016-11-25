@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { Router, Route, browserHistory } from 'react-router'
@@ -7,7 +7,7 @@ import { routerReducer, syncHistoryWithStore, routerMiddleware } from 'react-rou
 import createSagaMiddleware from 'redux-saga'
 import createLogger from 'redux-logger'
 
-import './index.css';
+import './index.css'
 
 import reducers from './reducers'
 
@@ -48,7 +48,6 @@ import Profile from './features/profile/containers/Profile'
 import NotFound from './components/NotFound'
 
 function checkAuth (nextState, replace) {
-
   let {loggedIn} = store.getState().auth
 
   store.dispatch(clearError())

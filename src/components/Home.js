@@ -4,9 +4,9 @@ import {connect} from 'react-redux'
 class Home extends Component {
   render () {
     return (
-        <article>
-          This is the home page.
-        </article>
+      <article>
+        This is the home page.
+      </article>
     )
   }
 }
