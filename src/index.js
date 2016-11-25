@@ -11,7 +11,7 @@ import './index.css';
 
 import reducers from './reducers'
 
-import { clearError } from './auth/actions.js'
+import { clearError } from './features/auth/actions.js'
 
 let logger = createLogger({
   // Ignore `CHANGE_FORM` actions in the logger, since they fire after every keystroke
@@ -42,9 +42,9 @@ const history = syncHistoryWithStore(baseHistory, store)
 
 import App from './containers/App'
 import Home from './components/Home'
-import Login from './auth/containers/Login'
-import Register from './auth/containers/Register'
-import Dashboard from './profile/containers/Profile'
+import Login from './features/auth/containers/Login'
+import Register from './features/auth/containers/Register'
+import Dashboard from './features/profile/containers/Profile'
 import NotFound from './components/NotFound'
 
 function checkAuth (nextState, replace) {

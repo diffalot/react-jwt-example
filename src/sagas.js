@@ -1,7 +1,7 @@
-import authSaga from './auth/sagas'
-import profileSaga from './profile/sagas'
+import authSaga from './features/auth/sagas'
+import profileSaga from './features/profile/sagas'
 
-export default function (middleware) {
-  middleware.run(authSaga)
-  middleware.run(profileSaga)
+export default function (sagaMiddleware) {
+  sagaMiddleware.run(authSaga)
+  sagaMiddleware.run(profileSaga)
 }

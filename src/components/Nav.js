@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import LoadingButton from '../auth/components/LoadingButton'
 import {Link} from 'react-router'
 
-import {logout, clearError} from '../auth/actions'
+import {logout, clearError} from '../features/auth/actions'
+import LoadingButton from '../features/auth/components/LoadingButton'
 
 class Nav extends Component {
   constructor (props) {
