@@ -3,30 +3,35 @@
  */
 
 import {
-  GET_PROFILE,
-  PROFILE_RETREIVED,
-  RECEIVE_API
+  FETCH_PROFILE,
+  FETCH_PROFILE_BEGIN,
+  FETCH_PROFILE_END,
+  FETCH_PROFILE_ERROR,
+
 } from './constants'
 
 // The initial application state
 let initialState = {
-  fetchingProfile: false,
-  profile: {}
+  fetchingProfile: false
 }
 
 // Takes care of changing the application state
 function reducer (state = initialState, action) {
   switch (action.type) {
-    case GET_PROFILE:
-      return Object.assign({}, state, {fetchingProfile: true})
-    case PROFILE_RETREIVED:
-      return Object.assign({}, state, {
-        profile: action.data,
+    case FETCH_PROFILE:
+      return state
+    case FETCH_PROFILE_BEGIN:
+     return Object.assign({}, state, {
+       fetchingProfile: true
+     })
+   case FETCH_PROFILE_END:
+     console.log({action})
+     return Object.assign({}, state, action.payload, {
         fetchingProfile: false
       })
-    case RECEIVE_API:
+    case FETCH_PROFILE_ERROR:
       return Object.assign({}, state, {
-        profile: action.data,
+        error: action.payload,
         fetchingProfile: false
       })
     default:

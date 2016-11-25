@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import {connect} from 'react-redux'
 
-import { getProfile } from '../actions'
+import { loadProfile } from '../actions'
 
 class Dashboard extends Component {
   componentDidMount () {
-    this.props.dispatch(getProfile())
+    this.props.dispatch(loadProfile())
   }
   render () {
     return (
@@ -25,7 +25,7 @@ Dashboard.propTypes = {
 
 function select (state) {
   return {
-    profile: state.profile.profile
+    profile: state.profile
   }
 }
 
