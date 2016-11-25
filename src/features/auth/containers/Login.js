@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import Form from '../components/LoginForm'
+import LoginForm from '../components/LoginForm'
 
 import {loginRequest} from '../actions'
 
@@ -16,14 +16,7 @@ class Login extends Component {
     let {formState, currentlySending, error} = this.props.data
 
     return (
-      <div className='form-page__wrapper'>
-        <div className='form-page__form-wrapper'>
-          <div className='form-page__form-header'>
-            <h2 className='form-page__form-heading'>Login</h2>
-          </div>
-          <Form data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._login} btnText={'Login'} error={error} currentlySending={currentlySending} />
-        </div>
-      </div>
+        <LoginForm data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._login} btnText={'Login'} error={error} currentlySending={currentlySending} />
     )
   }
 
