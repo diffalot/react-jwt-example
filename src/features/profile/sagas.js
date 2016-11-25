@@ -13,7 +13,7 @@ import { fetchProfile as getProfile } from './services'
 
 // Worker Sagas
 
-export function * fetchProfile () {
+export function * loadProfile () {
   yield put({type: FETCH_PROFILE_BEGIN})
   try {
     const profile = yield getProfile()
@@ -25,8 +25,8 @@ export function * fetchProfile () {
 
 // Watcher Sagas
 
-export function * fetchProfileWatcher () {
-  yield * takeLatest(FETCH_PROFILE, fetchProfile)
+export function * loadProfileWatcher () {
+  yield * takeLatest(FETCH_PROFILE, loadProfile)
 }
 
-export default fetchProfileWatcher
+export default loadProfileWatcher
