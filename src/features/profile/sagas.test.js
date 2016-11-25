@@ -5,16 +5,15 @@ import {
   FETCH_PROFILE_BEGIN,
   FETCH_PROFILE_END,
   FETCH_PROFILE_ERROR
-  // TODO: REQUEST_JWT_TOKEN
 } from './constants'
 
-import { loadProfile, loadProfileWatcher } from './sagas'
-import { loadProfile as fetchProfile } from './actions'
+import { fetchProfile, fetchProfileWatcher } from './sagas'
+import { fetchProfile as getProfile } from './actions'
 
 describe('profile watcher saga', () => {
   it('should watch for FETCH_PROFILE', () => {
-    const expected = take(FETCH_PROFILE, loadProfile)
-    const generator = loadProfileWatcher()
+    const expected = take(FETCH_PROFILE, getProfile)
+    const generator = fetchProfileWatcher()
     let next = generator.next()
     expect(next.value).toEqual(expected)
   })
@@ -23,7 +22,7 @@ describe('profile watcher saga', () => {
 describe('profile worker saga', () => {
   it('should handle FETCH_PROFILE', () => {
     const expected = put({type: FETCH_PROFILE_BEGIN})
-    const generator = loadProfile()
+    const generator = fetchProfile()
     let next = generator.next(fetchProfile())
     expect(next.value).toEqual(expected)
   })

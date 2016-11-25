@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
 
-class NotFound extends Component {
+export class NotFound extends Component {
   render () {
     return (
       <article>

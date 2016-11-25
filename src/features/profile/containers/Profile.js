@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
-import { loadProfile } from '../actions'
+import { fetchProfile } from '../actions'
 
 export class Profile extends Component {
   componentDidMount () {
-    this.props.dispatch(loadProfile())
+    this.props.dispatch(fetchProfile())
   }
   render () {
     return (

@@ -6,7 +6,7 @@ import { logout, clearError } from '../features/auth/actions'
 // FIXME: this seems like a long reach
 import LoadingButton from '../features/auth/components/LoadingButton'
 
-class Nav extends Component {
+export class Nav extends Component {
   constructor (props) {
     super(props)
     this._logout = this._logout.bind(this)

@@ -26,7 +26,6 @@ function reducer (state = initialState, action) {
         fetchingProfile: true
       })
     case FETCH_PROFILE_END:
-      console.log({action})
       return Object.assign({}, state, action.payload, {
         fetchingProfile: false
       })
