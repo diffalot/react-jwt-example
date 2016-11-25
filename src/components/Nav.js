@@ -1,7 +1,9 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router'
+import React, { Component } from 'react'
+import { Link } from 'react-router'
 
-import {logout, clearError} from '../features/auth/actions'
+import { logout, clearError } from '../features/auth/actions'
+
+// FIXME: this seems like a long reach
 import LoadingButton from '../features/auth/components/LoadingButton'
 
 class Nav extends Component {
