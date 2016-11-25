@@ -77,7 +77,7 @@ function checkAuth (nextState, replace) {
 
 // Mostly boilerplate, except for the routes. These are the pages you can go to,
 // which are all wrapped in the App component, which contains the navigation etc
-class LoginFlow extends Component {
+class ReactJwtExample extends Component {
   render () {
     return (
       <Provider store={store}>
@@ -97,4 +97,4 @@ class LoginFlow extends Component {
   }
 }
 
-ReactDOM.render(<LoginFlow />, document.getElementById('root'))
+ReactDOM.render(<ReactJwtExample />, document.getElementById('root'))
