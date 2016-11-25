@@ -13,10 +13,10 @@ export class Register extends Component {
 
   render () {
     let {dispatch} = this.props
-    let {formState, currentlySending, error} = this.props.data
+    let {formState, currentlySending, error} = this.props.state
 
     return (
-      <LoginForm data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._register} btnText={'Register'} error={error} currentlySending={currentlySending} />
+      <LoginForm state={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._register} btnText={'Register'} error={error} currentlySending={currentlySending} />
     )
   }
 
@@ -26,14 +26,14 @@ export class Register extends Component {
 }
 
 Register.propTypes = {
-  data: React.PropTypes.object,
+  state: React.PropTypes.object,
   history: React.PropTypes.object,
   dispatch: React.PropTypes.func
 }
 
 function select (state) {
   return {
-    data: state.auth
+    state: state.auth
   }
 }
 

@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import LoginForm from '../components/LoginForm'
 
-import {loginRequest} from '../actions'
+import { loginRequest } from '../actions'
 
 export class Login extends Component {
   constructor (props) {
@@ -12,11 +12,19 @@ export class Login extends Component {
   }
 
   render () {
-    let {dispatch} = this.props
-    let {formState, currentlySending, error} = this.props.data
+    let { dispatch } = this.props
+    let { formState, currentlySending, error } = this.props.state
 
     return (
-      <LoginForm data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._login} btnText={'Login'} error={error} currentlySending={currentlySending} />
+      <LoginForm
+        state={formState}
+        dispatch={dispatch}
+        history={this.props.history}
+        onSubmit={this._login}
+        btnText={'Login'}
+        error={error}
+        currentlySending={currentlySending}
+      />
     )
   }
 
@@ -26,7 +34,7 @@ export class Login extends Component {
 }
 
 Login.propTypes = {
-  data: React.PropTypes.object,
+  state: React.PropTypes.object,
   history: React.PropTypes.object,
   dispatch: React.PropTypes.func
 }
@@ -34,7 +42,7 @@ Login.propTypes = {
 // Which props do we want to inject, given the global state?
 function select (state) {
   return {
-    data: state.auth
+    state: state.auth
   }
 }
 

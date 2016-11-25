@@ -16,14 +16,13 @@ class Form extends Component {
     let {error} = this.props
 
     return (
-      <form className='form' onSubmit={this._onSubmit}>
+      <form onSubmit={this._onSubmit}>
         {error ? <ErrorMessage error={error} /> : null}
-        <div className='form__field-wrapper'>
+        <div>
           <input
-            className='form__field-input'
             type='email'
             id='email'
-            value={this.props.data.email}
+            value={this.props.state.email}
             placeholder='email@example.com'
             onChange={this._changeEmail}
             autoCorrect='off'
@@ -35,10 +34,9 @@ class Form extends Component {
         </div>
         <div>
           <input
-            className='form__field-input'
             id='password'
             type='password'
-            value={this.props.data.password}
+            value={this.props.state.password}
             placeholder='••••••••••'
             onChange={this._changePassword} />
           <label htmlFor='password'>
@@ -59,11 +57,11 @@ class Form extends Component {
   }
 
   _changeEmail (event) {
-    this._emitChange({...this.props.data, email: event.target.value})
+    this._emitChange({...this.props.state, email: event.target.value})
   }
 
   _changePassword (event) {
-    this._emitChange({...this.props.data, password: event.target.value})
+    this._emitChange({...this.props.state, password: event.target.value})
   }
 
   _emitChange (newFormState) {
@@ -72,13 +70,13 @@ class Form extends Component {
 
   _onSubmit (event) {
     event.preventDefault()
-    this.props.onSubmit(this.props.data.email, this.props.data.password)
+    this.props.onSubmit(this.props.state.email, this.props.state.password)
   }
 }
 
 Form.propTypes = {
   dispatch: React.PropTypes.func,
-  data: React.PropTypes.object,
+  state: React.PropTypes.object,
   onSubmit: React.PropTypes.func,
   changeForm: React.PropTypes.func,
   btnText: React.PropTypes.string,
