@@ -48,7 +48,7 @@ class Nav extends Component {
       <div>
         <div>
           <Link to='/' onClick={this._clearError}>
-            <h1>Login&nbsp;Flow</h1>
+            <h1>React JWT Example</h1>
           </Link>
           {navButtons}
         </div>
