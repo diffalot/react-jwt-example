@@ -6,7 +6,7 @@ import {
   FETCH_PROFILE,
   FETCH_PROFILE_BEGIN,
   FETCH_PROFILE_END,
-  FETCH_PROFILE_ERROR,
+  FETCH_PROFILE_ERROR
 } from './constants'
 
 // The initial application state
@@ -18,13 +18,13 @@ let initialState = {
 function reducer (state = initialState, action) {
   switch (action.type) {
     case FETCH_PROFILE:
-     return Object.assign({}, state, {
-       fetchingProfile: true
-     })
+      return Object.assign({}, state, {
+        fetchingProfile: true
+      })
     case FETCH_PROFILE_BEGIN:
-     return Object.assign({}, state, {
-       fetchingProfile: true
-     })
+      return Object.assign({}, state, {
+        fetchingProfile: true
+      })
     case FETCH_PROFILE_END:
       console.log({action})
       return Object.assign({}, state, action.payload, {

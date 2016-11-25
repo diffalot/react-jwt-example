@@ -3,7 +3,7 @@ import {
   FETCH_PROFILE,
   FETCH_PROFILE_BEGIN,
   FETCH_PROFILE_END,
-  FETCH_PROFILE_ERROR,
+  FETCH_PROFILE_ERROR
 } from './constants'
 
 describe('profile reducer', () => {

@@ -17,7 +17,8 @@ export class Profile extends Component {
 }
 
 Profile.propTypes = {
-  profile: PropTypes.object
+  profile: PropTypes.object,
+  dispatch: PropTypes.func
 }
 
 function select (state) {
