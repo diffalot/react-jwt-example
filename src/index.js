@@ -44,7 +44,7 @@ import App from './containers/App'
 import Home from './components/Home'
 import Login from './features/auth/containers/Login'
 import Register from './features/auth/containers/Register'
-import Dashboard from './features/profile/containers/Profile'
+import Profile from './features/profile/containers/Profile'
 import NotFound from './components/NotFound'
 
 function checkAuth (nextState, replace) {
@@ -87,7 +87,7 @@ class ReactJwtExample extends Component {
             <Route onEnter={checkAuth}>
               <Route path='/login' component={Login} />
               <Route path='/register' component={Register} />
-              <Route path='/dashboard' component={Dashboard} />
+              <Route path='/dashboard' component={Profile} />
             </Route>
             <Route path='*' component={NotFound} />
           </Route>

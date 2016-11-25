@@ -3,23 +3,20 @@ import {connect} from 'react-redux'
 
 import { loadProfile } from '../actions'
 
-class Dashboard extends Component {
+export class Profile extends Component {
   componentDidMount () {
     this.props.dispatch(loadProfile())
   }
   render () {
     return (
       <article>
-        <section className='text-section'>
-          <h1>Dashboard</h1>
-          <pre>{JSON.stringify(this.props.profile, null, 4)}</pre>
-        </section>
+        <pre>{JSON.stringify(this.props.profile, null, 4)}</pre>
       </article>
     )
   }
 }
 
-Dashboard.propTypes = {
+Profile.propTypes = {
   profile: PropTypes.object
 }
 
@@ -29,4 +26,4 @@ function select (state) {
   }
 }
 
-export default connect(select)(Dashboard)
+export default connect(select)(Profile)
