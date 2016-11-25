@@ -4,7 +4,7 @@ import LoginForm from '../components/LoginForm'
 
 import {registerRequest} from '../actions'
 
-class Register extends Component {
+export class Register extends Component {
   constructor (props) {
     super(props)
 
