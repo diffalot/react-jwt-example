@@ -1,5 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+
 import { Register } from './Register'
 
 it('renders without crashing', () => {
@@ -11,5 +12,5 @@ it('renders without crashing', () => {
       }
     }
   }
-  shallow(<Register state={state}/>)
+  shallow(<Register state={state} />)
 })

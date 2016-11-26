@@ -2,9 +2,10 @@ import { put, take } from 'redux-saga/effects'
 
 import {
   FETCH_PROFILE,
-  FETCH_PROFILE_BEGIN,
-  FETCH_PROFILE_END,
-  FETCH_PROFILE_ERROR
+  FETCH_PROFILE_BEGIN
+  // FIXME: how do I test these?
+  // FETCH_PROFILE_END,
+  // FETCH_PROFILE_ERROR
 } from './constants'
 
 import { fetchProfile, fetchProfileWatcher } from './sagas'
