@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ErrorMessage (props) {
+export function ErrorMessage (props) {
   return (
     <p>
       {props.error}

@@ -4,7 +4,7 @@ import LoadingButton from './LoadingButton'
 
 import {changeForm} from '../actions'
 
-class Form extends Component {
+export class LoginForm extends Component {
   constructor (props) {
     super(props)
 
@@ -74,7 +74,7 @@ class Form extends Component {
   }
 }
 
-Form.propTypes = {
+LoginForm.propTypes = {
   dispatch: React.PropTypes.func,
   state: React.PropTypes.object,
   onSubmit: React.PropTypes.func,
@@ -84,4 +84,4 @@ Form.propTypes = {
   currentlySending: React.PropTypes.bool
 }
 
-export default Form
+export default LoginForm

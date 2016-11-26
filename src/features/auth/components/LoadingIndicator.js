@@ -1,6 +1,6 @@
 import React from 'react'
 
-function LoadingIndicator () {
+export function LoadingIndicator () {
   return (
     <div>
       Loading
