@@ -42,6 +42,9 @@
       "describe": false,
       "it": false,
       "expect": false
+    },
+    "rules": {
+      "no-multi-spaces": 0
     }
   }
 }
