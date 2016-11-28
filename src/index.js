@@ -48,7 +48,7 @@ import Profile from './features/profile/containers/Profile'
 import NotFound from './components/NotFound'
 
 function checkAuth (nextState, replace) {
-  let {loggedIn} = store.getState().auth
+  let { loggedIn } = store.getState().auth
 
   store.dispatch(clearError())
 
