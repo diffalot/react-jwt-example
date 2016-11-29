@@ -44,7 +44,8 @@
       "expect": false
     },
     "rules": {
-      "no-multi-spaces": 0
+      "no-multi-spaces": 0,
+      "standard/object-curly-even-spacing": 0
     }
   }
 }
