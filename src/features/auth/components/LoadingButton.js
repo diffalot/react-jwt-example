@@ -1,4 +1,5 @@
-import React from 'react'
+import React            from 'react'
+
 import LoadingIndicator from './LoadingIndicator'
 
 export function LoadingButton (props) {

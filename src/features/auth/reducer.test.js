@@ -1,5 +1,4 @@
-import * as constants from './constants'
-
+import * as constants            from './constants'
 import reducer, { initialState } from './reducer'
 
 describe('auth reducer', () => {

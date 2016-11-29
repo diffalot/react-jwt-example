@@ -1,15 +1,19 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
-import { Router, Route, browserHistory } from 'react-router'
-import { routerReducer, syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
-import createSagaMiddleware from 'redux-saga'
-import createLogger from 'redux-logger'
+import ReactDOM                    from 'react-dom'
+import React, { Component        } from 'react'
+import        { createStore,
+                combineReducers,
+                applyMiddleware  } from 'redux'
+import        { Provider         } from 'react-redux'
+import        { Router,
+                Route,
+                browserHistory   } from 'react-router'
+import        { routerReducer,
+                syncHistoryWithStore,
+                routerMiddleware } from 'react-router-redux'
+import createSagaMiddleware        from 'redux-saga'
+import createLogger                from 'redux-logger'
 
-import './index.css'
-
-import reducers from './reducers'
+import reducers                    from './reducers'
 
 let logger = createLogger({
   // Ignore `CHANGE_FORM` actions in the logger, since they fire after every keystroke

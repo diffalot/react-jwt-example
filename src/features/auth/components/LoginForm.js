@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import ErrorMessage from './ErrorMessage'
-import LoadingButton from './LoadingButton'
+import React, { Component }   from 'react'
 
-import { inputChange } from '../actions'
+import ErrorMessage           from './ErrorMessage'
+import LoadingButton          from './LoadingButton'
+import        { inputChange } from '../actions'
 
 export class LoginForm extends Component {
   constructor (props) {

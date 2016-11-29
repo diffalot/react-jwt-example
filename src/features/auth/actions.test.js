@@ -1,5 +1,4 @@
-import * as actions from './actions'
-
+import * as actions   from './actions'
 import * as constants from './constants'
 
 describe('auth actions()', () => {

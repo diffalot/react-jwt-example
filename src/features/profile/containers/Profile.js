@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import        { connect              } from 'react-redux'
 
-import { fetchProfile } from '../actions'
+import        { fetchProfile         } from '../actions'
 
 export class Profile extends Component {
   componentDidMount () {

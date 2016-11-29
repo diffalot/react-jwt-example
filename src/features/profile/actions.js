@@ -1,7 +1,5 @@
-import {
-  FETCH_PROFILE
-} from './constants'
+import * as constants from './constants'
 
 export function fetchProfile () {
-  return { type: FETCH_PROFILE }
+  return { type: constants.FETCH_PROFILE }
 }

@@ -1,10 +1,14 @@
-import { take, call, put, fork, race } from 'redux-saga/effects'
+import { take,
+         call,
+         put,
+         fork,
+         race           } from 'redux-saga/effects'
 import { browserHistory } from 'react-router'
 
-import auth from './services'
+import auth               from './services'
 
-import * as constants from './constants'
-import * as actions from './actions'
+import * as constants     from './constants'
+import * as actions       from './actions'
 
 // worker sagas
 

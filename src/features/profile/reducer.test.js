@@ -1,10 +1,5 @@
-import reducer from './reducer'
-import {
-  FETCH_PROFILE,
-  FETCH_PROFILE_BEGIN,
-  FETCH_PROFILE_END,
-  FETCH_PROFILE_ERROR
-} from './constants'
+import reducer        from './reducer'
+import * as constants from './constants'
 
 describe('profile reducer', () => {
   it('should return initial state', () => {
@@ -18,7 +13,7 @@ describe('profile reducer', () => {
   })
   it('should handle FETCH_PROFILE', () => {
     expect(
-      reducer(undefined, { type: FETCH_PROFILE })
+      reducer(undefined, { type: constants.FETCH_PROFILE })
     ).toEqual(
       {
         fetchingProfile: true
@@ -27,7 +22,7 @@ describe('profile reducer', () => {
   })
   it('should handle FETCH_PROFILE_BEGIN', () => {
     expect(
-      reducer(undefined, { type: FETCH_PROFILE_BEGIN })
+      reducer(undefined, { type: constants.FETCH_PROFILE_BEGIN })
     ).toEqual(
       {
         fetchingProfile: true
@@ -36,7 +31,7 @@ describe('profile reducer', () => {
   })
   it('should handle FETCH_PROFILE_END', () => {
     expect(
-      reducer(undefined, { type: FETCH_PROFILE_END, payload: {id: 'uuid'} })
+      reducer(undefined, { type: constants.FETCH_PROFILE_END, payload: {id: 'uuid'} })
     ).toEqual(
       {
         fetchingProfile: false,
@@ -46,7 +41,7 @@ describe('profile reducer', () => {
   })
   it('should handle FETCH_PROFILE_ERROR', () => {
     expect(
-      reducer(undefined, { type: FETCH_PROFILE_ERROR, payload: {message: 'error'} })
+      reducer(undefined, { type: constants.FETCH_PROFILE_ERROR, payload: {message: 'error'} })
     ).toEqual(
       {
         fetchingProfile: false,
