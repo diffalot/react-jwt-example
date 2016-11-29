@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 
 import LoginForm from '../components/LoginForm'
-import { registerRequest } from '../actions'
+import { register } from '../actions'
 
 export class Register extends Component {
   constructor (props) {
@@ -12,16 +12,24 @@ export class Register extends Component {
   }
 
   render () {
-    let {dispatch} = this.props
-    let {formState, currentlySending, error} = this.props.state
+    let { dispatch } = this.props
+    let { authInputs, sending, error } = this.props.state
 
     return (
-      <LoginForm state={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._register} btnText={'Register'} error={error} currentlySending={currentlySending} />
+      <LoginForm
+        state={authInputs}
+        dispatch={dispatch}
+        history={this.props.history}
+        onSubmit={this._register}
+        btnText={'Register'}
+        error={error}
+        sending={sending}
+      />
     )
   }
 
   _register (email, password) {
-    this.props.dispatch(registerRequest({email, password}))
+    this.props.dispatch(register({email, password}))
   }
 }
 

@@ -8,6 +8,7 @@ it('renders without crashing', () => {
     email: '',
     password: ''
   }
+  let error = {}
   const div = document.createElement('div')
-  ReactDOM.render(<LoginForm state={state} />, div)
+  ReactDOM.render(<LoginForm state={state} error={error} />, div)
 })

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import ErrorMessage from './ErrorMessage'
 import LoadingButton from './LoadingButton'
 
-import {changeForm} from '../actions'
+import { inputChange } from '../actions'
 
 export class LoginForm extends Component {
   constructor (props) {
@@ -13,11 +13,11 @@ export class LoginForm extends Component {
     this._changePassword = this._changePassword.bind(this)
   }
   render () {
-    let {error} = this.props
+    let { error } = this.props
 
     return (
       <form onSubmit={this._onSubmit}>
-        {error ? <ErrorMessage error={error} /> : null}
+        {error.message ? <ErrorMessage error={error.message} /> : null}
         <div>
           <input
             type='email'
@@ -44,10 +44,10 @@ export class LoginForm extends Component {
           </label>
         </div>
         <div>
-          {this.props.currentlySending ? (
+          {this.props.sending ? (
             <LoadingButton />
           ) : (
-            <button className='form__submit-btn' type='submit'>
+            <button>
               {this.props.btnText}
             </button>
           )}
@@ -65,7 +65,7 @@ export class LoginForm extends Component {
   }
 
   _emitChange (newFormState) {
-    this.props.dispatch(changeForm(newFormState))
+    this.props.dispatch(inputChange(newFormState))
   }
 
   _onSubmit (event) {
@@ -80,8 +80,8 @@ LoginForm.propTypes = {
   onSubmit: React.PropTypes.func,
   changeForm: React.PropTypes.func,
   btnText: React.PropTypes.string,
-  error: React.PropTypes.string,
-  currentlySending: React.PropTypes.bool
+  error: React.PropTypes.object,
+  sending: React.PropTypes.bool
 }
 
 export default LoginForm

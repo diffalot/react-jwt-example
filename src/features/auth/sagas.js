@@ -1,47 +1,19 @@
-// This file contains the sagas used for async actions in our app. It's divided into
-// "effects" that the sagas call (`authorize` and `logout`) and the actual sagas themselves,
-// which listen for actions.
+import { take, call, put, fork, race } from 'redux-saga/effects'
+import { browserHistory } from 'react-router'
 
-// Sagas help us gather all our side effects (network requests in this case) in one place
+import auth from './services'
 
-// import {hashSync} from 'bcryptjs'
-// import genSalt from '../auth/salt'
-import {browserHistory} from 'react-router'
-import {take, call, put, fork, race} from 'redux-saga/effects'
-import auth from './index.js'
+import * as constants from './constants'
+import * as actions from './actions'
 
-import {
-  SENDING_REQUEST,
-  LOGIN_REQUEST,
-  REGISTER_REQUEST,
-  SET_AUTH,
-  LOGOUT,
-  CHANGE_FORM,
-  REQUEST_ERROR,
-  API_REQUEST
-} from './constants'
+// worker sagas
 
-/**
- * Effect to handle authorization
- * @param  {string} email                  The email of the user
- * @param  {string} password               The password of the user
- * @param  {object} options                Options
- * @param  {boolean} options.isRegistering Is this a register request?
- */
-export function * authorize ({email, password, isRegistering}) {
-  // We send an action that tells Redux we're sending a request
-  yield put({type: SENDING_REQUEST, sending: true})
+export function * login ({ email, password, isRegistering }) {
+  yield put(actions.sending(true))
 
-  // We then try to register or log in the user, depending on the request
   try {
-    // let salt = genSalt(username)
-    // let hash = hashSync(password, salt)
     let response
 
-    // For either log in or registering, we call the proper function in the `auth`
-    // module, which is asynchronous. Because we're using generators, we can work
-    // as if it's synchronous because we pause execution until the call is done
-    // with `yield`!
     if (isRegistering) {
       response = yield call(auth.register, email, password)
     } else {
@@ -50,119 +22,78 @@ export function * authorize ({email, password, isRegistering}) {
 
     return response
   } catch (error) {
-    console.log('hi')
-    // If we get an error we send Redux the appropiate action and return
-    yield put({type: REQUEST_ERROR, error: error.message})
-
+    yield put(actions.error(error))
     return false
   } finally {
-    // When done, we tell Redux we're not in the middle of a request any more
-    yield put({type: SENDING_REQUEST, sending: false})
+    yield put(actions.sending(false))
   }
 }
 
-/**
- * Effect to handle logging out
- */
 export function * logout () {
-  // We tell Redux we're in the middle of a request
-  yield put({type: SENDING_REQUEST, sending: true})
+  yield put(actions.sending(true))
 
-  // Similar to above, we try to log out by calling the `logout` function in the
-  // `auth` module. If we get an error, we send an appropiate action. If we don't,
-  // we return the response.
   try {
     let response = yield call(auth.logout)
-    yield put({type: SENDING_REQUEST, sending: false})
+    yield put(actions.sending(false))
 
     return response
   } catch (error) {
-    yield put({type: REQUEST_ERROR, error: error.message})
+    yield put(actions.error(error))
   }
 }
 
-/**
- * Log in saga
- */
-export function * loginFlow () {
-  // Because sagas are generators, doing `while (true)` doesn't block our program
-  // Basically here we say "this saga is always listening for actions"
-  while (true) {
-    // And we're listening for `LOGIN_REQUEST` actions and destructuring its payload
-    let request = yield take(LOGIN_REQUEST)
-    let {email, password} = request.data
+// watcher sagas
 
-    // A `LOGOUT` action may happen while the `authorize` effect is going on, which may
-    // lead to a race condition. This is unlikely, but just in case, we call `race` which
-    // returns the "winner", i.e. the one that finished first
+export function * watchLogin () {
+  while (true) {
+    let request = yield take(constants.LOGIN)
+    let { email, password } = request.payload
+
     let winner = yield race({
-      auth: call(authorize, {email, password, isRegistering: false}),
-      logout: take(LOGOUT)
+      login: call(login, { email, password, isRegistering: false }),
+      logout: take(constants.LOGOUT)
     })
 
-    // If `authorize` was the winner...
-    if (winner.auth) {
-      // ...we send Redux appropiate actions
-      yield put({type: SET_AUTH, newAuthState: true}) // User is logged in (authorized)
-      yield put({type: CHANGE_FORM, newFormState: {email: '', password: ''}}) // Clear form
-      yield put({type: API_REQUEST, endpoint: '/api/me', method: 'GET'})
-      forwardTo('/dashboard') // Go to dashboard page
-      // If `logout` won...
+    if (winner.login) {
+      yield put(actions.set(true))
+      yield put(actions.inputChange({email: '', password: ''}))
+      forwardTo('/dashboard')
     } else if (winner.logout) {
-      // ...we send Redux appropiate action
-      yield put({type: SET_AUTH, newAuthState: false}) // User is not logged in (not authorized)
-      yield call(logout) // Call `logout` effect
-      forwardTo('/') // Go to root page
+      yield call(logout)
+      forwardTo('/')
     }
   }
 }
 
-/**
- * Log out saga
- * This is basically the same as the `if (winner.logout)` of above, just written
- * as a saga that is always listening to `LOGOUT` actions
- */
-export function * logoutFlow () {
+export function * watchLogout () {
   while (true) {
-    yield take(LOGOUT)
-    yield put({type: SET_AUTH, newAuthState: false})
+    yield take(constants.LOGOUT)
+    yield put(actions.set(false))
 
     yield call(logout)
     forwardTo('/')
   }
 }
 
-/**
- * Register saga
- * Very similar to log in saga!
- */
-export function * registerFlow () {
+export function * watchRegister () {
   while (true) {
-    // We always listen to `REGISTER_REQUEST` actions
-    let request = yield take(REGISTER_REQUEST)
+    let request = yield take(constants.REGISTER)
     let {email, password} = request.data
 
-    // We call the `authorize` task with the data, telling it that we are registering a user
-    // This returns `true` if the registering was successful, `false` if not
-    let wasSuccessful = yield call(authorize, {email, password, isRegistering: true})
+    let wasSuccessful = yield call(login, {email, password, isRegistering: true})
 
-    // If we could register a user, we send the appropiate actions
     if (wasSuccessful) {
-      yield put({type: SET_AUTH, newAuthState: true}) // User is logged in (authorized) after being registered
-      yield put({type: CHANGE_FORM, newFormState: {email: '', password: ''}}) // Clear form
+      yield put(actions.set(true))
+      yield put(actions.inputChange({email: '', password: ''}))
       forwardTo('/dashboard') // Go to dashboard page
     }
   }
 }
 
-// The root saga is what we actually send to Redux's middleware. In here we fork
-// each saga so that they are all "active" and listening.
-// Sagas are fired once at the start of an app and can be thought of as processes running
-// in the background, watching actions dispatched to the store.
 export default function * root () {
-  yield fork(loginFlow)
-  yield fork(logoutFlow)
-  yield fork(registerFlow)
+  yield fork(watchLogin)
+  yield fork(watchLogout)
+  yield fork(watchRegister)
 }
 
 // Little helper function to abstract going to different pages

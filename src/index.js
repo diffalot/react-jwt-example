@@ -11,8 +11,6 @@ import './index.css'
 
 import reducers from './reducers'
 
-import { clearError } from './features/auth/actions.js'
-
 let logger = createLogger({
   // Ignore `CHANGE_FORM` actions in the logger, since they fire after every keystroke
   predicate: (getState, action) => action.type !== 'CHANGE_FORM'
@@ -49,8 +47,6 @@ import NotFound from './components/NotFound'
 
 function checkAuth (nextState, replace) {
   let { loggedIn } = store.getState().auth
-
-  store.dispatch(clearError())
 
   // Check if the path isn't dashboard. That way we can apply specific logic to
   // display/render the path we want to

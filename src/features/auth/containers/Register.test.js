@@ -10,7 +10,8 @@ it('renders without crashing', () => {
       formState: {
         email: '',
         password: ''
-      }
+      },
+      error: {}
     }
   }
   shallow(<Register state={state} />)

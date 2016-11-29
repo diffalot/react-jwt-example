@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import LoginForm from '../components/LoginForm'
-import { loginRequest } from '../actions'
+import { login } from '../actions'
 
 export class Login extends Component {
   constructor (props) {
@@ -13,23 +13,23 @@ export class Login extends Component {
 
   render () {
     let { dispatch } = this.props
-    let { formState, currentlySending, error } = this.props.state
+    let { authInputs, sending, error } = this.props.state
 
     return (
       <LoginForm
-        state={formState}
+        state={authInputs}
         dispatch={dispatch}
         history={this.props.history}
         onSubmit={this._login}
         btnText={'Login'}
         error={error}
-        currentlySending={currentlySending}
+        sending={sending}
       />
     )
   }
 
   _login (email, password) {
-    this.props.dispatch(loginRequest({email, password}))
+    this.props.dispatch(login({email, password}))
   }
 }
 

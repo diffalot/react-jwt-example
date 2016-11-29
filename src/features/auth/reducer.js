@@ -1,5 +1,5 @@
 import * as constants from './constants'
-import auth from '../auth'
+import auth from './services'
 
 export const initialState = {
   authInputs: {
