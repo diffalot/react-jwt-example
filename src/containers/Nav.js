@@ -1,11 +1,11 @@
-import React, { Component  } from 'react'
-import        { Link       } from 'react-router'
+import React, { Component     } from 'react'
+import        { Link          } from 'react-router'
 
 import        { logout,
-                clearError } from '../features/auth/actions'
+                clearError    } from '../features/auth/actions'
 
-// FIXME: this seems like a long reach
-import LoadingButton from '../features/auth/components/LoadingButton'
+// FIXME: is the index in auth refrencing the proper function?
+import        { LoadingButton } from '../features/auth/'
 
 export class Nav extends Component {
   constructor (props) {
