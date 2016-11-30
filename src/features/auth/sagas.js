@@ -10,40 +10,15 @@ import auth               from './services'
 import * as constants     from './constants'
 import * as actions       from './actions'
 
-// worker sagas
-
-export function * login ({ email, password, isRegistering }) {
-  yield put(actions.sending(true))
-
-  try {
-    let response
-
-    if (isRegistering) {
-      response = yield call(auth.register, email, password)
-    } else {
-      response = yield call(auth.login, email, password)
-    }
-
-    return response
-  } catch (error) {
-    yield put(actions.error(error))
-    return false
-  } finally {
-    yield put(actions.sending(false))
-  }
+export default function * root () {
+  yield fork(watchLogin)
+  yield fork(watchLogout)
+  yield fork(watchRegister)
 }
 
-export function * logout () {
-  yield put(actions.sending(true))
-
-  try {
-    let response = yield call(auth.logout)
-    yield put(actions.sending(false))
-
-    return response
-  } catch (error) {
-    yield put(actions.error(error))
-  }
+// Little helper function to abstract going to different pages
+function forwardTo (location) {
+  browserHistory.push(location)
 }
 
 // watcher sagas
@@ -94,13 +69,38 @@ export function * watchRegister () {
   }
 }
 
-export default function * root () {
-  yield fork(watchLogin)
-  yield fork(watchLogout)
-  yield fork(watchRegister)
+// worker sagas
+
+export function * login ({ email, password, isRegistering }) {
+  yield put(actions.sending(true))
+
+  try {
+    let response
+
+    if (isRegistering) {
+      response = yield call(auth.register, email, password)
+    } else {
+      response = yield call(auth.login, email, password)
+    }
+
+    return response
+  } catch (error) {
+    yield put(actions.error(error))
+    return false
+  } finally {
+    yield put(actions.sending(false))
+  }
 }
 
-// Little helper function to abstract going to different pages
-function forwardTo (location) {
-  browserHistory.push(location)
+export function * logout () {
+  yield put(actions.sending(true))
+
+  try {
+    let response = yield call(auth.logout)
+    yield put(actions.sending(false))
+
+    return response
+  } catch (error) {
+    yield put(actions.error(error))
+  }
 }
