@@ -5,6 +5,7 @@
   "proxy": "http://localhost:4000",
   "devDependencies": {
     "enzyme": "^2.6.0",
+    "eslint": "^3.18.0",
     "eslint-config-standard": "^6.2.1",
     "eslint-config-standard-react": "^4.2.0",
     "eslint-plugin-promise": "^3.4.0",
