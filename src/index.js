@@ -7,11 +7,12 @@ import        { Provider         } from 'react-redux'
 import        { Router,
                 Route,
                 browserHistory   } from 'react-router'
-import        { routerReducer,
-                syncHistoryWithStore,
-                routerMiddleware } from 'react-router-redux'
+import        { ConnectedRouter,
+                routerReducer,
+                routerMiddleware,
+                push             } from 'react-router-redux'
+import        { createLogger     } from 'redux-logger'
 import createSagaMiddleware        from 'redux-saga'
-import createLogger                from 'redux-logger'
 
 import reducers                    from './reducers'
 
@@ -25,7 +26,7 @@ let sagaMiddleware = createSagaMiddleware()
 const baseHistory = browserHistory
 const routingMiddleware = routerMiddleware(baseHistory)
 const reducer = combineReducers(Object.assign({}, reducers, {
-  routing: routerReducer
+  router: routerReducer
 }))
 
 const store = createStore(reducer,
@@ -39,8 +40,6 @@ const store = createStore(reducer,
 import runSagas from './sagas'
 
 runSagas(sagaMiddleware)
-
-const history = syncHistoryWithStore(baseHistory, store)
 
 import App from './containers/App'
 import Home from './components/Home'
@@ -80,7 +79,7 @@ class ReactJwtExample extends Component {
   render () {
     return (
       <Provider store={store}>
-        <Router history={history}>
+        <ConnectedRouter history={baseHistory}>
           <Route component={App}>
             <Route path='/' component={Home} />
             <Route onEnter={checkAuth}>
@@ -90,7 +89,7 @@ class ReactJwtExample extends Component {
             </Route>
             <Route path='*' component={NotFound} />
           </Route>
-        </Router>
+        </ConnectedRouter>
       </Provider>
     )
   }
